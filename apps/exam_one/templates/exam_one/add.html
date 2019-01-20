@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes</title>
+</head>
+<body>
+<div class ="container">
+{% if messages %}
+<ul class="messages">
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<h2>Create a New Wish List </h2>
+<a href ="/exam/">Back</a>
+<input type="submit" name="logout" value="Logout">  
+
+<div class="float-right">
+<div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li {% if message.tags %} {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+
+
+<form action = '/exam/processadd', method = 'POST'>
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Item</label>
+            <input type="text" class="form-control" name="item" id="exampleFormControlInput1" placeholder="enter item">
+            {% if messages %}
+            {% for message in messages %}
+            {% if 'itemlength' in message.tags %} 
+            {{ message }}
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+
+        <input type="submit" name="add" value="Submit">
+
+    </form>
+
+    
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class ="container">
+        <h2>Welcome  {{user_name.fname}} </h2>
+        <h3>Your Wishlist</h3>
+
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Item </th>
+                    <th scope="col">Added By</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for i in items %}
+                  <tr>
+                    <a href="/exam_one/show/{{i.item_created.id}}"><td>{{ i.item }}</td></a>
+                    <td>{{ i.item_created.fname }}</td>
+                    <td>{{ i.created_at }}</td>
+                    <!-- <td><a href = "/quote/show/{{x.quote_created.id}}">{{ x.quote_created.fname }}</a></td> -->
+                    <form action="/exam/delete/{{i.id}}/">
+                    <td>{% if request.session.user_id == i.item_created.id %}
+                        <a href = "/exam/delete/{{i.id}}">Delete Post</a>
+                        {% endif %}
+                    </td>
+                    </form>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+        <h3>Other's Wishlist</h3>
+        
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Item </th>
+                    <th scope="col">Added By</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in other %}
+                  <tr>
+                  <td> <a href="/exam/show/{{i.item_created.id}}">{{ i.item }}</a> </td> 
+                    <td>{{ i.item_created.fname }}</td>
+                    <td>{{ i.created_at }}</td>
+                    <!-- <td><a href = "/quote/show/{{x.quote_created.id}}">{{ x.quote_created.fname }}</a></td> -->
+                    <!-- <form action="/quote/delete/{{x.id}}/">
+                    <td>{% if request.session.user_id == x.quote_created.id %}
+                        <a href = "/quote/delete/{{x.id}}">Delete Post</a>
+                        {% endif %}
+                    </td>
+                    </form> -->
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+
+              <a href="/exam/add">Create Item</a>
+     
+            <div>
+                <a href="/exam/add">Add</a>
+                <a href="/exam/show/(?P<number>\d+)">Show</a>
+                <a href="/exam/edit">Edit</a>
+                <a href="/logout">Logout</a>
+            </div>
+       
+   
+    </div>
+    
+</body>
+</html>
