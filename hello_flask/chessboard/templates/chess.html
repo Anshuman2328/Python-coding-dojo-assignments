@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chessboard</title>
+<style>
+        tr{
+            width: 100px;
+            height: 100px;
+        }
+        td{
+            width: 100px;
+            height: 100px;
+        }
+        .even{
+            background-color:{{color1}};
+            color: red;
+        }
+        .odd {
+            color: black;
+            background-color: {{color2}};
+        }
+</style>
+
+
+</head>
+<body>
+    
+        <h1>Welcome to the Flask Tutorial</h1>
+
+        <table>
+        {% for x in range (val1) %}
+            {% if x % 2 != 0 %}
+            <tr class = "odd">
+                    {% for y in range (val2) %}
+                        {% if y % 2 != 0 %}
+                        <td class = "odd"></td>
+                        {% else %}
+                        <td class = "even"></td>
+                        {% endif %}
+                    {% endfor %}
+            </tr>
+            {% else %}
+            <tr class = "even">
+                    {% for y in range (val2) %}
+                        {% if y % 2 == 0 %}
+                            <td class = "odd"></td>
+                        {% else %}
+                            <td class = "even"></td>
+                        {% endif %}
+                    {% endfor %}
+            </tr>
+
+            {% endif %}
+        {% endfor %}
+        </table>
+
+        
+
+</body>
+</html>
